@@ -8,7 +8,7 @@ flex-direction: column;
 .background img{
     position: absolute;
     background-repeat: no-repeat; 
-  /* background-size:cover; */
+ 
    background-attachment:scroll;
    z-index: -1;
    width: 100%;
@@ -47,5 +47,10 @@ flex-direction: column;
     margin: 2px 0.5px;
     cursor: pointer;
     border-radius: 20px;  
+}
+@media (max-width: 330px){
+    .dropdown select, .btn{
+        width: 80%;
+    }
 }
 

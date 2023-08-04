@@ -5,25 +5,36 @@ import { Form, useNavigate, useRouteLoaderData } from "react-router-dom";
 import { requester } from "../../service/requester";
 
 import { QuestionsContext } from "../../context/QuestionsContext";
+import Button from "../../components/Button/Button";
+import { toast } from "react-toastify";
+
 
 function Start(props) {
-  const [category, setCategory] = useState();
-  const [difficulty, setDifficulty] = useState();
+  const { questions, addQuestions, decrementResults } =useContext(QuestionsContext);
+  const allCategoriesFromApi = useRouteLoaderData("root")["trivia_categories"];
 
-  const { questions, addQuestions } = useContext(QuestionsContext);
+  const [category, setCategory] = useState('');
+  const [difficulty, setDifficulty] = useState('');
+  
+ 
 
   const navigate = useNavigate();
-  const allCategoriesFromApi = useRouteLoaderData("root")["trivia_categories"];
-  useEffect(()=>{
-    
-  },[questions])
+  
+  useEffect(() => {
+    decrementResults();
+  }, [decrementResults]);
 
   async function onFormSubmitHandler(e) {
     e.preventDefault();
-    let data = await requester(category, difficulty);
-    addQuestions(data);
-
-    navigate("/questions");
+    if (category.trim()!== '' &&  difficulty.trim()!== '') {
+      let data = await requester(category, difficulty);
+      addQuestions(data);
+  
+      navigate("/questions");
+    } else{
+      toast.error('Please select category and difficulty!')
+    }
+ 
   }
   return (
     <div className={styles.background}>
@@ -36,6 +47,7 @@ function Start(props) {
         <div className={styles.dropdowns}>
           <div className={styles.dropdown}>
             <label> Category:</label>
+            {/* {unvalidForm.difficulty && <label className={styles.unvalid}>Please, select category!</label>} */}
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -50,6 +62,7 @@ function Start(props) {
           </div>
           <div className={styles.dropdown}>
             <label> Difficulty:</label>
+            {/* {unvalidForm.difficulty && <label className={styles.unvalid}>Please, select difficulty!</label>} */}
             <select
               value={difficulty}
               onChange={(e) => setDifficulty(e.target.value)}
@@ -62,11 +75,8 @@ function Start(props) {
           </div>
         </div>
 
-        <div className={styles.buttons}>
-          <button className={styles.btn} type="submit">
-            Start
-          </button>
-        </div>
+        <Button type="submit" name="Start" link=''></Button>
+    
       </Form>
     </div>
   );
