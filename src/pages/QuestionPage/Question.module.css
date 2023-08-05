@@ -8,14 +8,7 @@
 .questionsSection div {
   gap: 1rem;
 }
-.questionsSection img {
-    position: absolute;
-    background-repeat: no-repeat; 
-   background-attachment:scroll;
-   z-index: -1;
-   width: 100%;
-   height: 100%;
-}
+
 .soundtrackIcon {
   display: flex;
   align-items: center;

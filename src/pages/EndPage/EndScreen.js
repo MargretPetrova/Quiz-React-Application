@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import { QuestionsContext } from "../../context/QuestionsContext";
 
 import styles from "./EndScreen.module.css";
-import background from "../../assets/images/back2.png";
 import { points } from "../../utilities/tableInfo";
+import Image from "../../components/Image/Image";
 
 function EndScreen(props) {
   const { results } = useContext(QuestionsContext);
 
   return (
     <div className={styles.endSection}>
-      <img src={background}></img>
+      <Image screen={'end'} />
       <div className={styles.title}>
         <h3>End of the game!</h3>
         <h4>Submited wrong answer or timed out</h4>

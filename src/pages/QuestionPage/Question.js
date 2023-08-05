@@ -3,11 +3,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { QuestionsContext } from "../../context/QuestionsContext";
 import styles from "./Question.module.css";
 import { useNavigate } from "react-router-dom";
-import background from "../../assets/images/quiz.jpg";
+
 import volume from "../../assets/images/volume.svg";
 import muteVolume from "../../assets/images/mute.svg";
 import soundtrack from "../../assets/audio/audio.mp3";
 import useSound from "use-sound";
+import Image from "../../components/Image/Image";
 
 function Question(props) {
   const { questions,addQuestions, incrementResult, results} =useContext(QuestionsContext);
@@ -44,7 +45,6 @@ function Question(props) {
       navigate('/end')
     }
     
-   
   }, [activeQuestion, counter]);
 
 
@@ -60,8 +60,6 @@ function Question(props) {
           }, 3000)
         console.log("wrong");
       }
-  
-   
   };
 
   const onNextClickHandler = () => {
@@ -74,9 +72,10 @@ function Question(props) {
         setAnswer('')
     } 
   };
+  
   return (
     <div className={styles.questionsSection}>
-      <img src={background} alt="background"></img>
+     <Image screen='questions'/>
       <div className={styles.counter}>{counter}</div>
       <div className={styles.soundtrackIcon}>
         <button
